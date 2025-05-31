@@ -91,26 +91,43 @@ Lisensi: "CC0: Public Domain"
 | Nama Fitur              | Tipe Data (Inferensi) | Deskripsi Singkat                                                             | Contoh Nilai                |
 |-------------------------|------------------------|--------------------------------------------------------------------------------|-----------------------------|
 | EmpID                   | object                 | ID unik karyawan                                                               | RM297, RM302                |
-| Age                     | int64                  | Usia karyawan dalam tahun                                                     | 35, 42                      |
+| Age                     | int64                  | Usia karyawan dalam tahun                                                      | 35, 42                      |
+| AgeGroup                | object                 | Kategori umur tempat karyawan dikelompokkan                                    | 30-40, 40-50                |
 | Attrition              | object                 | Apakah karyawan mengalami atrisi (Yes/Tidak)                                  | Yes, No                     |
-| BusinessTravel          | object                 | Frekuensi perjalanan bisnis                                                   | Travel_Rarely, Non-Travel   |
-| Department              | object                 | Departemen tempat karyawan bekerja                                            | Sales, Research & Development |
-| DistanceFromHome        | int64                  | Jarak dari rumah ke kantor (dalam satuan tertentu)                            | 10, 2                       |
-| Education               | int64                  | Tingkat pendidikan (misal 1=SMA, 3=S1, 4=S2)                                   | 3, 4                        |
-| EducationField          | object                 | Bidang pendidikan karyawan                                                    | Life Sciences, Medical      |
-| EnvironmentSatisfaction | int64                  | Tingkat kepuasan terhadap lingkungan kerja (skala)                            | 3, 4                        |
-| Gender                  | object                 | Jenis kelamin karyawan                                                        | Male, Female                |
-| JobInvolvement          | int64                  | Tingkat keterlibatan dalam pekerjaan (skala)                                  | 3, 2                        |
-| JobLevel                | int64                  | Level jabatan karyawan                                                        | 2, 5                        |
-| JobRole                 | object                 | Peran atau jabatan spesifik karyawan                                          | Sales Executive, Manager    |
-| JobSatisfaction         | int64                  | Tingkat kepuasan kerja (skala)                                                | 4, 1                        |
-| MonthlyIncome           | int64                  | Pendapatan bulanan karyawan                                                   | 5000, 12000                 |
-| NumCompaniesWorked      | int64                  | Jumlah perusahaan tempat karyawan pernah bekerja                              | 1, 5                        |
-| OverTime                | object                 | Apakah karyawan bekerja lembur                                                | Yes, No                     |
-| PercentSalaryHike       | int64                  | Persentase kenaikan gaji terakhir                                             | 15, 20                      |
-| PerformanceRating       | int64                  | Peringkat kinerja karyawan (Variabel Target)                                  | 3, 4                        |
-| TotalWorkingYears       | int64                  | Total tahun pengalaman kerja                                                  | 10, 20                      |
-| YearsAtCompany          | int64                  | Lama bekerja di perusahaan saat ini (dalam tahun)                             | 5, 2                        |
+| BusinessTravel          | object                 | Frekuensi perjalanan bisnis                                                    | Travel_Rarely, Non-Travel   |
+| DailyRate               | int64                  | Gaji harian karyawan                                                           | 800, 1200                   |
+| Department              | object                 | Departemen tempat karyawan bekerja                                             | Sales, R&D                  |
+| DistanceFromHome        | int64                  | Jarak dari rumah ke kantor (dalam mil)                                         | 10, 2                       |
+| Education               | int64                  | Tingkat pendidikan (misal 1=SMA, 3=S1, 4=S2)                                    | 3, 4                        |
+| EducationField          | object                 | Bidang pendidikan karyawan                                                     | Life Sciences, Medical      |
+| EmployeeCount           | int64                  | Jumlah pegawai (umumnya bernilai konstan)                                      | 1                           |
+| EmployeeNumber          | int64                  | Nomor unik karyawan                                                            | 1001, 1015                  |
+| EnvironmentSatisfaction | int64                  | Tingkat kepuasan terhadap lingkungan kerja (skala 1–4)                         | 3, 4                        |
+| Gender                  | object                 | Jenis kelamin karyawan                                                         | Male, Female                |
+| HourlyRate              | int64                  | Gaji per jam karyawan                                                          | 45, 80                      |
+| JobInvolvement          | int64                  | Tingkat keterlibatan dalam pekerjaan (skala 1–4)                               | 3, 2                        |
+| JobLevel                | int64                  | Level jabatan karyawan                                                         | 2, 5                        |
+| JobRole                 | object                 | Peran atau jabatan spesifik karyawan                                           | Sales Executive, Manager    |
+| JobSatisfaction         | int64                  | Tingkat kepuasan kerja (skala 1–4)                                             | 4, 1                        |
+| MaritalStatus           | object                 | Status pernikahan karyawan                                                     | Single, Married             |
+| MonthlyIncome           | int64                  | Pendapatan bulanan karyawan                                                    | 5000, 12000                 |
+| SalarySlab              | object                 | Kategori pengelompokan gaji bulanan                                            | Low, High                   |
+| MonthlyRate             | int64                  | Gaji bulanan standar                                                           | 20000, 15000                |
+| NumCompaniesWorked      | int64                  | Jumlah perusahaan tempat karyawan pernah bekerja                               | 1, 5                        |
+| Over18                  | object                 | Apakah karyawan berusia di atas 18 tahun                                       | Y                           |
+| OverTime                | object                 | Apakah karyawan bekerja lembur                                                 | Yes, No                     |
+| PercentSalaryHike       | int64                  | Persentase kenaikan gaji terakhir                                              | 15, 20                      |
+| PerformanceRating       | int64                  | Peringkat kinerja karyawan (biasanya skala 1–4)                                | 3, 4                        |
+| RelationshipSatisfaction| int64                  | Kepuasan terhadap hubungan kerja (skala 1–4)                                   | 2, 4                        |
+| StandardHours           | int64                  | Jam kerja standar (biasanya bernilai tetap)                                    | 40                          |
+| StockOptionLevel        | int64                  | Level opsi saham yang diberikan perusahaan                                     | 0, 1                        |
+| TotalWorkingYears       | int64                  | Total tahun pengalaman kerja                                                   | 10, 20                      |
+| TrainingTimesLastYear   | int64                  | Jumlah pelatihan yang diikuti tahun lalu                                       | 2, 4                        |
+| WorkLifeBalance         | int64                  | Kepuasan terhadap keseimbangan kerja dan hidup (skala 1–4)                     | 3, 4                        |
+| YearsAtCompany          | int64                  | Lama bekerja di perusahaan saat ini (dalam tahun)                              | 5, 2                        |
+| YearsInCurrentRole      | int64                  | Lama bekerja di posisi saat ini                                                | 3, 1                        |
+| YearsSinceLastPromotion | int64                  | Tahun sejak promosi terakhir                                                   | 2, 5                        |
+| YearsWithCurrManager    | float64                | Lama bekerja bersama atasan saat ini                                           | 3.0, 6.0                    |
 
 Tabel 1. Deskripsi Variabel Utama
 
