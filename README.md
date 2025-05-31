@@ -3,7 +3,7 @@
 
 ## Latar Belakang
 <p align="center">
-<img src="https://github.com/user-attachments/assets/354f5a18-eb18-4add-9d8a-4922788a1d4d" alt="terapan1"/>
+<img src= "https://github.com/user-attachments/assets/37c3e813-1b36-4e5f-a396-6bec399c6a3b"/>
 </p>
 
 
@@ -142,7 +142,7 @@ Analisis univariat akan dilakukan untuk setiap fitur guna memahami distribusinya
 1. Variabel Numerik (Age, MonthlyIncome, PercentSalaryHike, dll.):
 
 - Histogram digunakan untuk melihat bentuk distribusi masing-masing fitur numerik, seperti yang terlihat pada gambar
-  ![featurenumerikunivar](https://github.com/user-attachments/assets/340c9c31-25af-4531-b2d2-e48da1b1a250)
+  ![Image](https://github.com/user-attachments/assets/37f8e257-c28c-42ad-8e37-dbad6636f152)
 
 
 - Age: Distribusinya mendekati normal dengan puncak di sekitar 30–40 tahun. Sangat sedikit karyawan yang berusia < 20 atau > 60 tahun.
@@ -182,7 +182,7 @@ Analisis univariat akan dilakukan untuk setiap fitur guna memahami distribusinya
 2. Variabel Kategorikal (Department, JobRole, Gender, PerformanceRating, dll.):
 
 - Bar chart (diagram batang) digunakan untuk menunjukkan frekuensi atau proporsi setiap kategori. Visualisasi distribusi fitur kategorikal dapat dilihat pada gambar
-  ![featurekategorikaluni](https://github.com/user-attachments/assets/39a0f681-e280-428d-8325-4f1ac540c37e)
+  ![Image](https://github.com/user-attachments/assets/d75ff273-4c56-4206-aae1-6488cf29198a)
 
 Dari visualisasi ini, dapat diinterpretasikan:
 
@@ -220,7 +220,7 @@ Hubungan Antara Fitur Independen dan Variabel Target (PerformanceRating):
 1. Fitur Numerik vs. PerformanceRating:
 
 - Box plot digunakan  untuk membandingkan distribusi fitur numerik (misalnya, MonthlyIncome, PercentSalaryHike, YearsSinceLastPromotion) untuk setiap kategori PerformanceRating (kelas 3 dan 4). Visualisasi ini dapat dilihat pada 
-![bivariatenu](https://github.com/user-attachments/assets/e97d96ec-6268-4152-a8e6-0aec7baffd86)
+![Image](https://github.com/user-attachments/assets/753c7a00-774e-4ce9-a70a-f7e1c5b591f6)
 Dari plot-plot ini, kita dapat menginterpretasikan:
 
 
@@ -241,7 +241,7 @@ Dari plot-plot ini, kita dapat menginterpretasikan:
 2. Fitur Kategorikal vs. PerformanceRating:
 
 grouped bar chart  digunakan untuk menunjukkan bagaimana proporsi PerformanceRating 3 dan 4 didistribusikan dalam setiap kategori dari fitur kategorikal lain.
-![bivariatekat](https://github.com/user-attachments/assets/42ffc5ed-967f-40eb-8773-b17d67da8852)
+![Image](https://github.com/user-attachments/assets/953950e2-f600-4536-ae4a-015ae281ade3)
 Interpretasi dari visualisasi ini meliputi:
 
 
