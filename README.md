@@ -114,7 +114,7 @@ Lisensi: "CC0: Public Domain"
 | SalarySlab              | object                 | Kategori pengelompokan gaji bulanan                                            | Low, High                   |
 | MonthlyRate             | int64                  | Gaji bulanan standar                                                           | 20000, 15000                |
 | NumCompaniesWorked      | int64                  | Jumlah perusahaan tempat karyawan pernah bekerja                               | 1, 5                        |
-| Over18                  | object                 | Apakah karyawan berusia di atas 18 tahun                                       | Y                           |
+| Over18                  | object                 | Apakah karyawan berusia di atas 18 tahun                                       | Yes, NO                           |
 | OverTime                | object                 | Apakah karyawan bekerja lembur                                                 | Yes, No                     |
 | PercentSalaryHike       | int64                  | Persentase kenaikan gaji terakhir                                              | 15, 20                      |
 | PerformanceRating       | int64                  | Peringkat kinerja karyawan (biasanya skala 1–4)                                | 3, 4                        |
