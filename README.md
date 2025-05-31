@@ -131,7 +131,7 @@ Lisensi: "CC0: Public Domain"
 
 Tabel 1. Deskripsi Variabel Utama
 
-Variabel target dalam proyek ini adalah PerformanceRating. Berdasarkan observasi pada dataset serupa (misalnya, dataset IBM HR [21]), PerformanceRating seringkali merupakan skala ordinal. Dalam dataset ini, nilai yang ditemui untuk PerformanceRating adalah 3 ('Excellent') dan 4 ('Outstanding'). [18, 21] Analisis distribusi dari notebook codinga.ipynb menunjukkan bahwa sekitar 84.66% karyawan memiliki peringkat 3 dan 15.34% memiliki peringkat 4. Hal ini mengindikasikan adanya ketidakseimbangan kelas yang signifikan, di mana kelas '3' jauh lebih dominan daripada kelas '4'. Ketidakseimbangan ini perlu menjadi perhatian khusus dalam tahap evaluasi model, karena metrik seperti akurasi saja bisa menyesatkan.
+Variabel target dalam proyek ini adalah PerformanceRating. Berdasarkan observasi pada dataset serupa (misalnya, dataset IBM HR [21]), PerformanceRating seringkali merupakan skala ordinal. Dalam dataset ini, nilai yang ditemui untuk PerformanceRating adalah 3 ('Excellent') dan 4 ('Outstanding'). [18, 21] Analisis distribusi menunjukkan bahwa sekitar 84.66% karyawan memiliki peringkat 3 dan 15.34% memiliki peringkat 4. Hal ini mengindikasikan adanya ketidakseimbangan kelas yang signifikan, di mana kelas '3' jauh lebih dominan daripada kelas '4'. Ketidakseimbangan ini perlu menjadi perhatian khusus dalam tahap evaluasi model, karena metrik seperti akurasi saja bisa menyesatkan.
 
 Fitur-fitur seperti EmployeeCount, StandardHours, dan Over18 kemungkinan memiliki varians yang sangat rendah atau nilai konstan dan akan dipertimbangkan untuk dihapus pada tahap persiapan data. [18] Fitur EmpID dan EmployeeNumber adalah pengidentifikasi unik dan juga akan dihapus.
 
@@ -274,7 +274,29 @@ Tahap persiapan data sangat krusial untuk memastikan kualitas input model machin
 
 - Proses: Fitur-fitur seperti EmpID, EmployeeNumber, EmployeeCount, StandardHours, dan Over18 akan dihapus.
 
-- Alasan: Mengurangi dimensionalitas data, menyederhanakan model, dan menghindari noise yang tidak perlu. 
+- Alasan: Mengurangi dimensionalitas data, menyederhanakan model, dan menghindari noise yang tidak perlu.
+  
+### Penanganan Data Hilang (Missing Values) untuk YearsWithCurrManager:
+
+- Proses: Sebelum langkah pra-pemrosesan data yang lebih kompleks, dilakukan identifikasi dan penanganan nilai yang hilang pada kolom YearsWithCurrManager. Ditemukan bahwa kolom ini memiliki 57 nilai yang hilang. Nilai-nilai yang hilang ini kemudian diisi (diimputasi) menggunakan nilai median dari kolom YearsWithCurrManager itu sendiri.
+
+- Alasan:
+
+Pentingnya Mempertahankan Sampel: Menghapus 57 baris (sekitar 3.8% dari total sampel) dapat mengurangi ukuran dataset dan berpotensi menghilangkan informasi berharga.
+
+Robustisitas Median: Median dipilih karena lebih tahan terhadap outlier dibandingkan mean, terutama jika distribusi fitur YearsWithCurrManager miring (statistik deskriptif menunjukkan mean 4.12 dan median 3.0, mengindikasikan kemiringan).
+
+- Kelengkapan Data untuk Tahap Selanjutnya: Memastikan tidak ada nilai hilang pada fitur ini sebelum dilakukan transformasi lain atau pembagian data.
+  
+- Konsistensi: Imputasi memastikan semua sampel memiliki nilai untuk fitur ini, yang penting untuk beberapa algoritma.
+
+### Penghapusan Data Duplikat:
+
+- Proses: Setelah penanganan nilai missing awal, dilakukan penghapusan baris data yang duplikat dari pengecekan duplicated data sebelumnya didapati dari 1.480 ditemukan 7 baris yang sama dan saya melakukan penghapusan menggunakan df.drop_duplicates().
+
+- Alasan: Data duplikat dapat menyebabkan bias pada model dan memberikan estimasi kinerja yang terlalu optimis. Menghapusnya memastikan setiap baris data unik dan model belajar dari informasi yang tidak redundan.
+
+
 
 ### Penanganan Outlier:
 
@@ -306,76 +328,56 @@ Keputusan Pra-proses: Berdasarkan analisis saya, tidak dilakukan penghapusan ata
 
 3. Beberapa outlier mungkin mencerminkan kondisi nyata (misalnya, karyawan dengan masa kerja sangat lama atau pendapatan yang sangat tinggi) dan menghilangkan mereka dapat menghilangkan informasi penting.
 
-### Pengelompokan Fitur dan Konstruksi Pipeline Pra-pemrosesan:
-Langkah selanjutnya yang sangat penting adalah mempersiapkan fitur-fitur ini agar siap untuk tahap pra-pemrosesan dan kemudian pemodelan. Untuk melakukan ini secara efektif, fitur-fitur dikelompokkan berdasarkan tipe datanya: fitur numerik, fitur kategorikal nominal, dan fitur kategorikal ordinal.
+### Pemisahan Fitur dan Variabel Target:
 
-- Fitur Numerik: Kategori ini mencakup fitur-fitur yang nilainya berupa angka dan dapat diukur secara kuantitatif, seperti Age atau MonthlyIncome.
+Proses: Dataset dipisahkan menjadi fitur-fitur independen (X) dan variabel target (y, yaitu PerformanceRating).
 
-- Fitur Kategorikal Nominal: Fitur ini memiliki nilai yang merepresentasikan kategori-kategori yang tidak memiliki urutan atau tingkatan intrinsik. Contohnya termasuk Department atau Gender.
+Alasan: Ini adalah langkah standar dalam persiapan data untuk pemodelan supervised learning, di mana model belajar memetakan X ke y.
 
-- Fitur Kategorikal Ordinal: Serupa dengan fitur nominal, fitur ini juga bernilai kategori. Namun, perbedaannya adalah kategori-kategori dalam fitur ordinal memiliki urutan atau tingkatan yang jelas dan bermakna. Sebagai contoh, Education (jika memiliki skala tingkatan yang jelas) atau JobSatisfaction. Untuk fitur-fitur ini, pemetaan urutan kategori secara eksplisit akan didefinisikan (misalnya, dalam dictionary ordinal_cols_pipeline_with_mapping yang disebutkan dalam notebook).
+### Encoding Variabel Target (PerformanceRating):
 
-Setelah semua fitur dikelompokkan, verifikasi dilakukan untuk memastikan tidak ada tumpang tindih atau keanggotaan ganda suatu fitur di antara ketiga kelompok tipe ini. Ini penting untuk memastikan bahwa setiap fitur mendapatkan perlakuan pra-pemrosesan yang tepat dalam pipeline yang dibangun.
+Proses: Variabel target PerformanceRating, yang memiliki nilai unik 3 dan 4, di-encode menggunakan LabelEncoder. Transformasi ini mengubah nilai [3, 4] menjadi [0, 1].
 
-Sebuah pipeline pra-pemrosesan dibuat menggunakan ColumnTransformer dari Scikit-learn untuk menerapkan transformasi yang sesuai pada setiap jenis fitur secara konsisten dan efisien.
+Alasan: Banyak algoritma klasifikasi di Scikit-learn secara default mengharapkan label kelas dimulai dari 0 hingga n_classes-1. Label encoding memastikan kompatibilitas, mencegah potensi interpretasi yang salah oleh model, dan memudahkan kalkulasi beberapa metrik evaluasi.
 
-1. Transformer untuk Fitur Numerik (numerical_transformer):
+### Pengelompokan Fitur Independen dan Konstruksi Pipeline Pra-pemrosesan (preprocessor_deep_dive):
+Fitur-fitur independen (X) dikelompokkan berdasarkan tipenya: fitur numerik, fitur kategorikal nominal, dan fitur kategorikal ordinal.
 
-- Imputasi: SimpleImputer(strategy='median') digunakan untuk mengisi nilai yang hilang dengan nilai median dari kolom tersebut. Penggunaan median lebih disukai daripada mean karena lebih tahan terhadap keberadaan outlier.
+1. Fitur Numerik: Contoh: Age, MonthlyIncome.
 
-- Penskalaan (Scaling): StandardScaler() digunakan untuk mentransformasi semua fitur numerik sehingga memiliki mean 0 dan standar deviasi 1. Ini penting untuk banyak algoritma machine learning untuk mencegah fitur dengan skala nilai yang lebih besar mendominasi proses pembelajaran.
+2. Fitur Kategorikal Nominal: Contoh: Department, Gender.
 
-2. Transformer untuk Fitur Kategorikal Nominal (nominal_transformer):
+3. Fitur Kategorikal Ordinal: Contoh: Education, JobSatisfaction. Pemetaan urutan kategori didefinisikan secara eksplisit dalam ordinal_cols_pipeline_with_mapping.
 
-- Imputasi: SimpleImputer(strategy='most_frequent') digunakan untuk mengisi nilai yang hilang dengan nilai modus (kategori yang paling sering muncul) dari kolom tersebut.
+Sebuah pipeline pra-pemrosesan (preprocessor_deep_dive) kemudian dibuat menggunakan ColumnTransformer untuk menerapkan transformasi spesifik pada setiap kelompok fitur:
 
-- One-Hot Encoding: OneHotEncoder(handle_unknown='ignore', drop='first', sparse_output=False) digunakan untuk mengubah fitur kategorikal nominal menjadi representasi numerik.
+- Transformer untuk Fitur Numerik (numerical_transformer):
 
-handle_unknown='ignore': Memastikan kategori baru pada data uji diabaikan dan tidak menyebabkan error.
+Imputasi: SimpleImputer(strategy='median').
 
-drop='first': Menghilangkan satu kolom biner hasil encoding untuk setiap fitur untuk menghindari multikolinearitas sempurna.
+Penskalaan: StandardScaler().
 
-sparse_output=False': Menghasilkan dense array untuk kemudahan integrasi.
+- Transformer untuk Fitur Kategorikal Nominal (nominal_transformer):
 
-3. Transformer untuk Fitur Kategorikal Ordinal (ordinal_transformer):
+Imputasi: SimpleImputer(strategy='most_frequent').
 
-- Imputasi: SimpleImputer(strategy='most_frequent') digunakan untuk menangani nilai yang hilang.
+One-Hot Encoding: OneHotEncoder(handle_unknown='ignore', drop='first', sparse_output=False).
 
-- Ordinal Encoding: OrdinalEncoder(categories=ordinal_categories_list, handle_unknown='use_encoded_value', unknown_value=-1) digunakan untuk mengubah fitur kategorikal ordinal menjadi representasi numerik yang mempertahankan urutan.
+- Transformer untuk Fitur Kategorikal Ordinal (ordinal_transformer):
 
-categories=ordinal_categories_list: Menyediakan daftar urutan kategori yang benar (dari ordinal_cols_pipeline_with_mapping).
+Imputasi: SimpleImputer(strategy='most_frequent').
 
-handle_unknown='use_encoded_value', unknown_value=-1: Memberi nilai spesifik (-1) untuk kategori yang tidak dikenal pada data baru.
+Ordinal Encoding: OrdinalEncoder(categories=ordinal_categories_list, handle_unknown='use_encoded_value', unknown_value=-1).
 
-4. Menggabungkan Semua Transformer dengan ColumnTransformer (preprocessor):
+ColumnTransformer (preprocessor_deep_dive): Menggabungkan transformer di atas. Pengaturan remainder='passthrough', verbose_feature_names_out=False, dan preprocessor.set_output(transform="pandas") digunakan untuk memastikan output yang bersih dan berupa DataFrame Pandas.
 
-- Objek ColumnTransformer dibuat untuk menerapkan transformasi yang berbeda ke subset kolom yang berbeda secara simultan.
+Alasan Pipeline: Pendekatan ini memastikan konsistensi dalam penerapan transformasi, mencegah data leakage (karena di-fit hanya pada data latih), dan membuat alur kerja lebih terorganisir dan mudah direproduksi.
 
-- remainder='passthrough': Fitur yang tidak disebutkan dalam daftar transformer akan dilewatkan tanpa transformasi.
+### Pembagian Dataset (Train-Test Split):
 
-- verbose_feature_names_out=False: Menjaga nama kolom hasil transformasi tetap bersih tanpa prefiks nama transformer.
+Proses: Fitur X yang telah diproses oleh preprocessor_deep_dive (jika fitting dilakukan sebelum split) atau fitur X mentah (jika preprocessor akan di-fit hanya pada X_train di dalam pipeline model) dan variabel target y yang sudah di-encode dibagi menjadi data latih (X_train, y_train) dan data uji (X_test, y_test) dengan rasio 75% untuk data latih dan 25% untuk data uji. Parameter random_state=42 dan stratify=y digunakan.
 
-- preprocessor.set_output(transform="pandas"): Mengatur agar output dari ColumnTransformer berupa Pandas DataFrame, lengkap dengan nama kolom yang sesuai, yang memudahkan analisis dan debugging.
-
-Pendekatan pipeline ini memastikan bahwa semua langkah pra-pemrosesan diterapkan secara konsisten pada data latih dan data uji, mencegah data leakage, dan membuat alur kerja lebih terorganisir dan mudah direproduksi.
-
-5. Penanganan Data Hilang (Missing Values) Spesifik untuk YearsWithCurrManager:
-
-- Proses: Berdasarkan analisis pada notebook codinga.ipynb, ditemukan bahwa kolom YearsWithCurrManager memiliki 57 nilai yang hilang. Nilai-nilai yang hilang ini kemudian diisi (diimputasi) menggunakan nilai median dari kolom YearsWithCurrManager itu sendiri. Langkah ini kemungkinan dilakukan sebelum atau sebagai bagian dari SimpleImputer dalam pipeline numerik, tergantung pada implementasi spesifik di notebook.
-
-- Alasan:
-
-1. Pentingnya Mempertahankan Sampel: Dengan jumlah 57 nilai hilang (sekitar 3.8% dari total 1470 sampel), menghapus baris-baris ini dapat mengurangi ukuran dataset secara signifikan.
-
-2. Robustisitas Median: Median dipilih karena lebih tahan terhadap outlier dibandingkan mean, terutama jika distribusi fitur YearsWithCurrManager miring (statistik deskriptif menunjukkan mean 4.12 dan median 3.0, mengindikasikan kemiringan).
-
-3. Konsistensi: Imputasi memastikan semua sampel memiliki nilai untuk fitur ini, yang penting untuk beberapa algoritma. [8, 9]
-
-6. Pembagian Dataset (Train-Test Split):
-
-- Proses: Dataset dibagi menjadi data latih (80%) dan data uji (20%) menggunakan train_test_split. Parameter random_state digunakan untuk reproduktifitas, dan stratify=y (dimana y adalah PerformanceRating) digunakan untuk menjaga proporsi kelas target.
-
-- Alasan: Melatih model pada satu set dan mengujinya pada set lain untuk evaluasi objektif. [9]
+Alasan: Melatih dan menguji model pada set data yang berbeda untuk evaluasi objektif. Stratifikasi penting karena adanya ketidakseimbangan kelas pada variabel target. [9]
 
 ## Modeling
 Pada tahap ini, akan dilakukan pengembangan beberapa model machine learning untuk tugas klasifikasi PerformanceRating. Model yang diuji meliputi Logistic Regression, Random Forest, XGBoost, dan LGBM.
@@ -571,16 +573,43 @@ LGBM memberikan perspektif yang sedikit berbeda dengan menempatkan Age di urutan
 
 Secara keseluruhan, PercentSalaryHike secara konsisten muncul sebagai fitur yang sangat penting di semua model yang dianalisis. Fitur-fitur lain yang juga menunjukkan relevansi (meskipun dengan urutan dan bobot yang bervariasi antar model) meliputi aspek-aspek terkait pengalaman kerja (TotalWorkingYears, YearsInCurrentRole, YearsSinceLastPromotion), kompensasi (MonthlyRate, MonthlyIncome, DailyRate), kondisi kerja (OverTime_Yes), serta faktor demografis (Age, DistanceFromHome). Identifikasi fitur-fitur ini memberikan wawasan berharga mengenai faktor-faktor yang paling mungkin membedakan antara karyawan dengan PerformanceRating 3 dan 4 dalam dataset ini.
 
-## Kesimpulan
+### Kesimpulan Evaluation
 Proyek ini bertujuan untuk mengembangkan model machine learning yang mampu memprediksi peringkat kinerja (PerformanceRating) karyawan menggunakan dataset "HR Analytics Dataset" dari Kaggle. Berdasarkan analisis dan pemodelan yang dilakukan:
 
 - Model seperti XGBoost, LGBM, dan Logistic Regression menunjukkan kinerja yang sangat tinggi setelah optimasi hyperparameter, dengan F1-Score (Macro) dan Akurasi mencapai 1.00 pada data uji. Hasil ini mengindikasikan kemampuan klasifikasi yang sempurna pada set data uji yang digunakan.
 
 - Model Random Forest juga menunjukkan kinerja yang kuat dengan F1-Score (Macro) 0.91 dan Akurasi 0.96, meskipun sedikit di bawah tiga model lainnya, terutama dalam hal recall untuk kelas minoritas (PerformanceRating = 4).
 
-- Analisis kepentingan fitur dari berbagai model secara konsisten menyoroti PercentSalaryHike sebagai prediktor paling signifikan untuk PerformanceRating. Fitur lain yang juga menunjukkan kontribusi penting (meskipun dengan bobot bervariasi antar model) meliputi Age (terutama untuk LGBM), MonthlyRate, TotalWorkingYears, YearsInCurrentRole, YearsSinceLastPromotion, OverTime_Yes, dan DistanceFromHome.
 
-- Proyek ini telah berhasil memenuhi tujuan yang ditetapkan, yaitu membangun dan membandingkan model prediktif, melakukan optimasi, mengidentifikasi model terbaik, dan menganalisis faktor-faktor yang berpengaruh. Temuan ini memberikan dasar untuk pengambilan keputusan SDM yang lebih berbasis data dan objektif. Namun, skor yang sangat tinggi (sempurna) pada beberapa model memerlukan kehati-hatian dan validasi lebih lanjut terhadap potensi data leakage atau karakteristik dataset yang mungkin terlalu mudah dipisahkan, sebelum diimplementasikan dalam skenario dunia nyata. 
+1. Menjawab Problem Statements:
+
+- Efektivitas Model: Proyek ini berhasil membangun beberapa model machine learning (Logistic Regression, XGBoost, LGBM) yang menunjukkan efektivitas sangat tinggi (akurasi dan F1-score 1.00 pada data uji) dalam mengklasifikasikan PerformanceRating. Model Random Forest juga menunjukkan kinerja yang kuat (F1-macro 0.91). Ini menjawab pertanyaan pertama mengenai kemampuan membangun model yang efektif.
+
+- Algoritma Terbaik: Berdasarkan metrik evaluasi pada data uji, XGBoost, LGBM, dan Logistic Regression memberikan kinerja prediksi terbaik yang hampir identik dan sempurna. Pemilihan satu model "terbaik" dari ketiganya bisa mempertimbangkan faktor lain seperti kompleksitas atau waktu inferensi jika ada perbedaan signifikan.
+
+- Fitur Signifikan: Analisis feature importance mengungkapkan bahwa PercentSalaryHike secara konsisten menjadi faktor paling signifikan di hampir semua model. Fitur lain seperti Age (khususnya untuk LGBM), YearsSinceLastPromotion, OverTime_Yes, dan beberapa aspek kompensasi serta pengalaman kerja juga menunjukkan kontribusi. Ini menjawab pertanyaan mengenai fitur-fitur kunci yang memengaruhi kinerja.
+
+- Rekomendasi Strategis: Wawasan dari model ini (terutama fitur-fitur penting dan kinerja prediktif) dapat digunakan oleh manajemen SDM. Misalnya, jika PercentSalaryHike sangat berpengaruh, ini dapat menjadi dasar diskusi mengenai strategi kompensasi dan penghargaan yang lebih efektif. Identifikasi karyawan yang diprediksi memiliki kinerja 'Outstanding' dapat membantu dalam program pengembangan talenta dan perencanaan suksesi. Kinerja model yang tinggi juga menunjukkan potensi penggunaan alat prediktif untuk membantu objektivitas dalam proses evaluasi awal.
+
+2. Pencapaian Goals:
+
+- EDA telah dilakukan untuk memahami karakteristik dataset.
+
+- Pra-pemrosesan data yang komprehensif (termasuk penanganan duplikat, imputasi, encoding target dan fitur, scaling) telah dilaksanakan.
+
+- Beberapa model klasifikasi telah dikembangkan dan dibandingkan kinerjanya.
+
+- Optimasi hyperparameter telah dilakukan pada model-model utama.
+
+- Model dengan kinerja terbaik (XGBoost, LGBM, Logistic Regression) telah diidentifikasi berdasarkan metrik yang relevan.
+
+- Analisis fitur paling berpengaruh telah dilakukan.
+
+3. Dampak Solution Statements:
+
+- Analisis Data dan Pra-pemrosesan Komprehensif: Solusi ini berdampak signifikan pada kualitas data yang digunakan untuk melatih model. Langkah-langkah seperti penghapusan duplikat, imputasi nilai hilang pada YearsWithCurrManager, dan encoding yang tepat memastikan model belajar dari data yang bersih dan relevan. Kualitas data ini terukur dari tidak adanya error saat pemodelan dan kemampuan model untuk mencapai kinerja tinggi.
+
+- Pengembangan dan Optimasi Model Klasifikasi Komparatif: Solusi untuk mengembangkan dan mengoptimasi beberapa model memungkinkan identifikasi algoritma yang paling sesuai untuk dataset ini. RandomizedSearchCV membantu menemukan parameter optimal yang menghasilkan peningkatan kinerja signifikan (sebagaimana terlihat dari skor F1-CV yang tinggi untuk XGBoost, LGBM, dan Logistic Regression). Perbandingan metrik evaluasi antar model memberikan dasar yang kuat untuk memilih solusi prediktif terbaik. Skor F1-Score (Macro) dan Akurasi yang mencapai 1.00 pada beberapa model setelah optimasi menunjukkan dampak besar dari pendekatan ini.
 
 ## Referensi
 Referensi
