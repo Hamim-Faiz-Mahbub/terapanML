@@ -83,6 +83,9 @@ Sumber: [Kaggle 8](https://www.kaggle.com/datasets/saadharoon27/hr-analytics-dat
 Penyedia: Saad Haroon 9
 Lisensi: "CC0: Public Domain"
 
+### Dimensi Dataset Awal
+Dimensi Dataset (baris, kolom): (1480, 38)
+- Dataset diketahui Memiliki 1480 baris yang masing-masing memiliki 38 attribute di dalamnya
 
 ### Deskripsi Variabel
 
@@ -135,6 +138,119 @@ Variabel target dalam proyek ini adalah PerformanceRating. Berdasarkan observasi
 
 Fitur-fitur seperti EmployeeCount, StandardHours, dan Over18 kemungkinan memiliki varians yang sangat rendah atau nilai konstan dan akan dipertimbangkan untuk dihapus pada tahap persiapan data. [18] Fitur EmpID dan EmployeeNumber adalah pengidentifikasi unik dan juga akan dihapus.
 
+### Variasi Nilai Attribute
+--- Jumlah Nilai Unik per Kolom ---
+| Kolom                    | Jumlah Nilai Unik |
+|--------------------------|-------------------|
+| EmpID                    | 1470              |
+| Age                      | 43                |
+| AgeGroup                 | 5                 |
+| Attrition                | 2                 |
+| BusinessTravel           | 4                 |
+| DailyRate                | 886               |
+| Department               | 3                 |
+| DistanceFromHome         | 29                |
+| Education                | 5                 |
+| EducationField           | 6                 |
+| EmployeeCount            | 1                 |
+| EmployeeNumber           | 1470              |
+| EnvironmentSatisfaction  | 4                 |
+| Gender                   | 2                 |
+| HourlyRate               | 71                |
+| JobInvolvement           | 4                 |
+| JobLevel                 | 5                 |
+| JobRole                  | 9                 |
+| JobSatisfaction          | 4                 |
+| MaritalStatus            | 3                 |
+| MonthlyIncome            | 1349              |
+| SalarySlab               | 4                 |
+| MonthlyRate              | 1427              |
+| NumCompaniesWorked       | 10                |
+| Over18                   | 1                 |
+| OverTime                 | 2                 |
+| PercentSalaryHike        | 15                |
+| PerformanceRating        | 2                 |
+| RelationshipSatisfaction | 4                 |
+| StandardHours            | 1                 |
+| StockOptionLevel         | 4                 |
+| TotalWorkingYears        | 40                |
+| TrainingTimesLastYear    | 7                 |
+| WorkLifeBalance          | 4                 |
+| YearsAtCompany           | 37                |
+| YearsInCurrentRole       | 19                |
+| YearsSinceLastPromotion  | 16                |
+| YearsWithCurrManager     | 18                |
+
+### Missing Value
+--- Pemeriksaan Missing Values ---
+| No. | Kolom                 | Jumlah Missing | Persentase Missing (%) |
+|-----|-----------------------|----------------|------------------------|
+| 37  | YearsWithCurrManager  | 57             | 3.851351               |
+
+-dari pemeriksaan missing value, attribute YearsWithCurrManager ditemukan sebanyak 57 value bernilai kosong, dan secara keseluruhan jika dipresentasikan bernilai 3,851%
+
+### Duplicated data
+| EmpID |    Age    | AgeGroup | Attrition | BusinessTravel | DailyRate |       Department       | DistanceFromHome | Education | EducationField | … | RelationshipSatisfaction | StandardHours | StockOptionLevel | TotalWorkingYears | TrainingTimesLastYear | WorkLifeBalance | YearsAtCompany | YearsInCurrentRole | YearsSinceLastPromotion | YearsWithCurrManager |
+|-------|-----------|----------|-----------|----------------|-----------|------------------------|------------------|-----------|----------------|---|--------------------------|---------------|------------------|-------------------|-----------------------|-----------------|----------------|---------------------|------------------------|---------------------|
+|   327 | RM1461    |     29   |  26-35    |    No          | Travel_Rarely | 468 | Research & Development |              28 |         4 | Medical        | … |                        2 |            80 |                0 |                 5 |                     3 |               1 |              5 |                   4 |                      0 |                 4.0 |
+|   328 | RM1461    |     29   |  26-35    |    No          | Travel_Rarely | 468 | Research & Development |              28 |         4 | Medical        | … |                        2 |            80 |                0 |                 5 |                     3 |               1 |              5 |                   4 |                      0 |                 4.0 |
+|  1335 | RM1462    |     50   |  46-55    |    Yes         | Travel_Rarely | 410 | Sales                  |              28 |         3 | Marketing      | … |                        2 |            80 |                1 |                20 |                     3 |               3 |              3 |                   2 |                      2 |                 0.0 |
+|  1336 | RM1462    |     50   |  46-55    |    Yes         | Travel_Rarely | 410 | Sales                  |              28 |         3 | Marketing      | … |                        2 |            80 |                1 |                20 |                     3 |               3 |              3 |                   2 |                      2 |                 0.0 |
+|   952 | RM1463    |     39   |  36-45    |    No          | Travel_Rarely | 722 | Sales                  |              24 |         1 | Marketing      | … |                        1 |            80 |                1 |                21 |                     2 |               2 |             20 |                   9 |                      9 |                 6.0 |
+|   954 | RM1463    |     39   |  36-45    |    No          | Travel_Rarely | 722 | Sales                  |              24 |         1 | Marketing      | … |                        1 |            80 |                1 |                21 |                     2 |               2 |             20 |                   9 |                      9 |                 6.0 |
+|   457 | RM1464    |     31   |  26-35    |    No          | Non-Travel    | 325 | Research & Development |               5 |         3 | Medical        | … |                        2 |            80 |                0 |                10 |                     2 |               3 |              9 |                   4 |                      1 |                 7.0 |
+|   458 | RM1464    |     31   |  26-35    |    No          | Non-Travel    | 325 | Research & Development |               5 |         3 | Medical        | … |                        2 |            80 |                0 |                10 |                     2 |               3 |              9 |                   4 |                      1 |                 7.0 |
+|   210 | RM1468    |     27   |  26-35    |    No          | Travel_Rarely | 155 | Research & Development |               4 |         3 | Life Sciences  | … |                        2 |            80 |                1 |                 6 |                     0 |               3 |              6 |                   2 |                      0 |                 3.0 |
+|   211 | RM1468    |     27   |  26-35    |    No          | Travel_Rarely | 155 | Research & Development |               4 |         3 | Life Sciences  | … |                        2 |            80 |                1 |                 6 |                     0 |               3 |              6 |                   2 |                      0 |                 3.0 |
+
+- Dari 1.480 baris data terdapat 7 baris duplikat (mewakili 7 karyawan yang tercatat dua kali), seperti yang terlihat pada contoh RM1461, RM1462, RM1463, RM1464, dan RM1468 yang nilainya persis sama di semua kolom. Duplikat ini dapat memengaruhi statistik misalnya menaikkan frekuensi kategori tertentu atau mengubah nilai rata-rata dalam analisis numerik oleh karena itu sebaiknya kita menghapus baris-baris tersebut sehingga hanya tersisa 1.473 
+### Outlier Data
+
+| Kolom                     | Outliers Count | Percentage Outliers (%) | Lower Bound | Upper Bound |
+|---------------------------|----------------|-------------------------|-------------|-------------|
+| TrainingTimesLastYear     | 240            | 16.216216               | 0.50        | 4.50        |
+| MonthlyIncome             | 114            | 7.702703                | -5270.00    | 16576.00    |
+| YearsSinceLastPromotion   | 108            | 7.297297                | -4.50       | 7.50        |
+| YearsAtCompany            | 105            | 7.094595                | -6.00       | 18.00       |
+| StockOptionLevel          | 85             | 5.743243                | -1.50       | 2.50        |
+| TotalWorkingYears         | 63             | 4.256757                | -7.50       | 28.50       |
+| NumCompaniesWorked        | 52             | 3.513514                | -3.50       | 8.50        |
+| YearsInCurrentRole        | 21             | 1.418919                | -5.50       | 14.50       |
+| YearsWithCurrManager      | 13             | 0.878378                | -5.50       | 14.50       |
+| JobInvolvement            | 0              | 0.000000                | 0.50        | 4.50        |
+| HourlyRate                | 0              | 0.000000                | -4.50       | 135.50      |
+| EnvironmentSatisfaction   | 0              | 0.000000                | -1.00       | 7.00        |
+| EmployeeNumber            | 0              | 0.000000                | -1118.00    | 3180.00     |
+| EmployeeCount             | 0              | 0.000000                | 1.00        | 1.00        |
+| Education                 | 0              | 0.000000                | -1.00       | 7.00        |
+| DistanceFromHome          | 0              | 0.000000                | -16.00      | 32.00       |
+| DailyRate                 | 0              | 0.000000                | -573.00     | 2195.00     |
+| Age                       | 0              | 0.000000                | 10.50       | 62.50       |
+| RelationshipSatisfaction  | 0              | 0.000000                | -1.00       | 7.00        |
+| StandardHours             | 0              | 0.000000                | 80.00       | 80.00       |
+| MonthlyRate               | 0              | 0.000000                | -10563.25   | 39074.75    |
+| JobLevel                  | 0              | 0.000000                | -2.00       | 6.00        |
+| JobSatisfaction           | 0              | 0.000000                | -1.00       | 7.00        |
+| PercentSalaryHike         | 0              | 0.000000                | 3.00        | 27.00       |
+| WorkLifeBalance           | 0              | 0.000000                | 0.50        | 4.50        |
+
+- Proses: Analisis outlier dilakukan menggunakan metode IQR (Interquartile Range). Berdasarkan output  fitur dengan outlier signifikan antara lain:
+
+1. TrainingTimesLastYear: 240 outlier (16.2%) di luar rentang [0.5 – 4.5] sesi.
+
+2. MonthlyIncome: 114 outlier (7.7%) di luar rentang [–5270 – 16576] ribu.
+
+3. YearsSinceLastPromotion: 108 outlier (7.3%) di luar rentang [–4.5 – 7.5] tahun.
+
+4. YearsAtCompany: 105 outlier (7.1%) di luar rentang [–6 – 18] tahun.
+
+5. StockOptionLevel: 85 outlier (5.7%) di luar rentang [–1.5 – 2.5] level.
+
+6. TotalWorkingYears: 63 outlier (4.3%) di luar rentang [–7.5 – 28.5] tahun.
+
+7. NumCompaniesWorked: 52 outlier (3.5%) di luar rentang [–3.5 – 8.5] perusahaan.
+
+Fitur lain seperti YearsInCurrentRole (21 outlier, 1.4%) dan YearsWithCurrManager (13 outlier, 0.9%) memiliki persentase outlier yang lebih kecil, sementara banyak fitur numerik lain (misalnya Age, DistanceFromHome, JobLevel) memiliki 0% outlier berdasarkan metode IQR.
 ### EDA - Univariate 
 
 Analisis univariat akan dilakukan untuk setiap fitur guna memahami distribusinya:
@@ -300,24 +416,6 @@ Robustisitas Median: Median dipilih karena lebih tahan terhadap outlier dibandin
 
 ### Penanganan Outlier:
 
-Proses: Analisis outlier dilakukan menggunakan metode IQR (Interquartile Range). Berdasarkan output  fitur dengan outlier signifikan antara lain:
-
-1. TrainingTimesLastYear: 240 outlier (16.2%) di luar rentang [0.5 – 4.5] sesi.
-
-2. MonthlyIncome: 114 outlier (7.7%) di luar rentang [–5270 – 16576] ribu.
-
-3. YearsSinceLastPromotion: 108 outlier (7.3%) di luar rentang [–4.5 – 7.5] tahun.
-
-4. YearsAtCompany: 105 outlier (7.1%) di luar rentang [–6 – 18] tahun.
-
-5. StockOptionLevel: 85 outlier (5.7%) di luar rentang [–1.5 – 2.5] level.
-
-6. TotalWorkingYears: 63 outlier (4.3%) di luar rentang [–7.5 – 28.5] tahun.
-
-7. NumCompaniesWorked: 52 outlier (3.5%) di luar rentang [–3.5 – 8.5] perusahaan.
-
-Fitur lain seperti YearsInCurrentRole (21 outlier, 1.4%) dan YearsWithCurrManager (13 outlier, 0.9%) memiliki persentase outlier yang lebih kecil, sementara banyak fitur numerik lain (misalnya Age, DistanceFromHome, JobLevel) memiliki 0% outlier berdasarkan metode IQR.
-
 Keputusan Pra-proses: Berdasarkan analisis saya, tidak dilakukan penghapusan atau transformasi outlier.
 
 - Alasan:
@@ -380,53 +478,53 @@ Proses: Fitur X yang telah diproses oleh preprocessor_deep_dive (jika fitting di
 Alasan: Melatih dan menguji model pada set data yang berbeda untuk evaluasi objektif. Stratifikasi penting karena adanya ketidakseimbangan kelas pada variabel target. [9]
 
 ## Modeling
-Pada tahap ini, akan dilakukan pengembangan beberapa model machine learning untuk tugas klasifikasi PerformanceRating. Model yang diuji meliputi Logistic Regression, Random Forest, XGBoost, dan LGBM.
+Pada tahap ini, akan dilakukan pengembangan beberapa model machine learning untuk tugas klasifikasi PerformanceRating. Model yang diuji meliputi Logistic Regression, Random Forest, XGBoost, dan LGBM. Setiap model akan digabungkan dengan preprocessor_deep_dive dalam sebuah Pipeline Scikit-learn untuk memastikan pra-pemrosesan diterapkan secara konsisten.
 
-1. Random Forest
+1. Logistic Regression
 
-- Prinsip Kerja: Metode ensemble learning yang membangun banyak pohon keputusan. [26, 27]
+- Cara Kerja: Regresi Logistik adalah algoritma klasifikasi linear yang memprediksi probabilitas suatu instance milik kelas tertentu. Ia menggunakan fungsi logistik (sigmoid) untuk memetakan output linear dari kombinasi fitur ke rentang probabilitas (0 hingga 1). Keputusan klasifikasi kemudian dibuat berdasarkan ambang batas tertentu (biasanya 0.5). [24, 25] Untuk menemukan parameter (koefisien) terbaik, model ini meminimalkan fungsi kerugian (seperti log-loss) menggunakan teknik optimasi. Regularisasi (L1 atau L2) dapat ditambahkan untuk mencegah overfitting dengan memberikan penalti pada besarnya koefisien.
 
-- Parameter Default & Optimasi: Model awal dilatih dengan parameter default, kemudian dioptimasi menggunakan RandomizedSearchCV (10 kandidat, 3 folds CV). Parameter terbaik yang ditemukan untuk Random Forest setelah tuning adalah: {'classifier__n_estimators': 150, 'classifier__min_samples_split': 5, 'classifier__min_samples_leaf': 5, 'classifier__max_depth': None}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 0.9814. Ini menunjukkan bahwa dengan konfigurasi ini, model Random Forest memiliki kemampuan generalisasi yang baik pada data validasi silang, dengan n_estimators (jumlah pohon) sebesar 150 sebagai nilai optimal untuk keseimbangan antara kinerja dan kompleksitas.
+- Parameter Default & Optimasi: Parameter terbaik yang ditemukan setelah tuning menggunakan RandomizedSearchCV adalah: {'classifier__penalty': 'l1', 'classifier__C': 10}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 0.9991.
 
-- Kelebihan: Akurasi tinggi, robust terhadap overfitting. [26, 27]
+- Kelebihan: Sederhana, interpretable, cepat dilatih, dan efisien secara komputasi. Koefisiennya dapat memberikan wawasan tentang pentingnya fitur. [24, 25]
 
-- Kekurangan: Kurang interpretable, komputasi lebih berat. [26, 27]
+- Kekurangan: Mengasumsikan hubungan linear antara fitur dan log-odds dari output, mungkin tidak bekerja dengan baik pada data dengan hubungan non-linear yang kompleks, dan sensitif terhadap multikolinearitas. [24]
 
-2. XGBoost (Extreme Gradient Boosting)
+2. Random Forest
 
-- Prinsip Kerja: Implementasi gradient boosting yang efisien. [30, 31]
+- Cara Kerja: Random Forest adalah metode ensemble learning yang bekerja dengan membangun sejumlah besar pohon keputusan (decision trees) secara independen pada berbagai sub-sampel data latih (teknik bagging atau bootstrap aggregating). Untuk setiap split pada pohon, hanya subset acak dari fitur yang dipertimbangkan (random feature selection). Hal ini bertujuan untuk mengurangi varians dan korelasi antar pohon, sehingga meningkatkan robustisitas dan akurasi model. Untuk prediksi klasifikasi, setiap pohon memberikan "suara" untuk kelas tertentu, dan kelas dengan suara mayoritas menjadi prediksi akhir dari forest. [26, 27]
 
-- Parameter Default & Optimasi: Model awal dilatih dengan parameter default, kemudian dioptimasi menggunakan RandomizedSearchCV (10 kandidat, 3 folds CV). Parameter terbaik yang ditemukan untuk XGBoost setelah tuning adalah: {'classifier__subsample': 0.8, 'classifier__n_estimators': 200, 'classifier__max_depth': 3, 'classifier__learning_rate': 0.05, 'classifier__colsample_bytree': 0.8}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000. Konfigurasi ini, dengan learning_rate yang relatif kecil (0.05) dan n_estimators sebanyak 200, bersama dengan max_depth 3 (pohon yang tidak terlalu dalam untuk mencegah overfitting) dan penggunaan subsample serta colsample_bytree untuk variasi, menghasilkan kinerja sempurna pada validasi silang.
+- Parameter Default & Optimasi: Parameter terbaik yang ditemukan setelah tuning menggunakan RandomizedSearchCV adalah: {'classifier__n_estimators': 150, 'classifier__min_samples_split': 5, 'classifier__min_samples_leaf': 5, 'classifier__max_depth': None}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000 
 
-- Kelebihan: Kinerja prediktif state-of-the-art, fleksibel, regularisasi kuat. [30, 31]
+- Kelebihan: Umumnya memiliki akurasi prediksi yang tinggi, robust terhadap overfitting dibandingkan satu decision tree, dapat menangani data dengan banyak fitur, dan menyediakan ukuran kepentingan fitur. [26, 27]
 
-- Kekurangan: Sensitif terhadap hyperparameter, potensi overfitting jika tidak di-tune. [30]
+- Kekurangan: Lebih kompleks dan kurang interpretable secara langsung dibandingkan satu decision tree, memerlukan lebih banyak sumber daya komputasi untuk pelatihan. [26, 27]
 
-3. LGBM (Light Gradient Boosting Machine)
+3. XGBoost (Extreme Gradient Boosting)
 
-- Prinsip Kerja: Implementasi gradient boosting lain yang dikenal karena kecepatan dan efisiensinya.
+- Cara Kerja: XGBoost adalah implementasi dari algoritma gradient boosting yang sangat dioptimalkan dan efisien. Gradient boosting membangun model (pohon keputusan) secara sekuensial. Setiap pohon baru dilatih untuk memperbaiki kesalahan (residual atau gradien dari loss function) yang dibuat oleh pohon-pohon sebelumnya dalam ensemble. XGBoost menggunakan pendekatan gradient descent dalam ruang fungsi untuk meminimalkan fungsi kerugian dan menyertakan teknik regularisasi (L1 dan L2) serta optimasi lainnya (seperti penanganan nilai hilang secara internal dan parallel processing) untuk meningkatkan kinerja dan mencegah overfitting. [30, 31]
 
-- Parameter Default & Optimasi: Model awal dilatih dengan parameter default, kemudian dioptimasi menggunakan RandomizedSearchCV (10 kandidat, 3 folds CV). Parameter terbaik yang ditemukan untuk LGBM setelah tuning adalah: {'classifier__num_leaves': 20, 'classifier__n_estimators': 150, 'classifier__max_depth': -1, 'classifier__learning_rate': 0.05}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000. Serupa dengan XGBoost, LGBM dengan learning_rate 0.05 dan n_estimators 150 mencapai kinerja sempurna di CV, dengan num_leaves 20 yang mengontrol kompleksitas pohon.
+- Parameter Default & Optimasi: Parameter terbaik yang ditemukan setelah tuning menggunakan RandomizedSearchCV adalah: {'classifier__subsample': 0.8, 'classifier__n_estimators': 200, 'classifier__max_depth': 3, 'classifier__learning_rate': 0.05, 'classifier__colsample_bytree': 0.8}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000.
 
-- Kelebihan: Cepat, efisien memori, kinerja baik.
+- Kelebihan: Seringkali menghasilkan kinerja prediktif state-of-the-art pada data tabular, fleksibel, dan memiliki mekanisme regularisasi yang kuat. [30, 31]
 
-- Kekurangan: Bisa overfit pada dataset kecil, memerlukan tuning.
+- Kekurangan: Pelatihan bisa lebih lambat dibandingkan Random Forest (meskipun implementasinya sangat dioptimalkan), lebih sensitif terhadap hyperparameter, dan bisa lebih rentan overfitting jika tidak di-tune dengan baik. [30]
 
-4. Logistic Regression
+4. LGBM (Light Gradient Boosting Machine)
 
-- Prinsip Kerja: Model linier untuk klasifikasi. [24, 25]
+- Cara Kerja: LGBM adalah kerangka kerja gradient boosting lain yang menggunakan teknik berbasis pohon. Perbedaan utamanya dengan XGBoost adalah cara pohon dibangun: LGBM menggunakan pertumbuhan pohon berbasis daun (leaf-wise) daripada berbasis level (level-wise) seperti XGBoost tradisional atau Random Forest. Pertumbuhan leaf-wise memungkinkan model untuk fokus pada daun yang memberikan pengurangan kerugian terbesar, yang bisa lebih efisien dan menghasilkan akurasi lebih baik, terutama pada dataset besar. LGBM juga menggunakan teknik seperti Gradient-based One-Side Sampling (GOSS) dan Exclusive Feature Bundling (EFB) untuk mempercepat pelatihan dan mengurangi penggunaan memori.
 
-- Parameter Default & Optimasi: Model awal dilatih dengan parameter default, kemudian dioptimasi (kemungkinan menggunakan GridSearchCV atau RandomizedSearchCV). Parameter terbaik yang ditemukan untuk Logistic Regression setelah tuning adalah: {'classifier__penalty': 'l1', 'classifier__C': 10}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 0.9991. Penggunaan regularisasi L1 (penalty='l1') dengan parameter kekuatan invers C=10 menunjukkan kinerja yang sangat tinggi, hampir sempurna, pada validasi silang.
+- Parameter Default & Optimasi: Parameter terbaik yang ditemukan setelah tuning menggunakan RandomizedSearchCV adalah: {'classifier__num_leaves': 20, 'classifier__n_estimators': 150, 'classifier__max_depth': -1, 'classifier__learning_rate': 0.05}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000.
 
-- Kelebihan: Sederhana, interpretable, cepat. [24, 25]
+- Kelebihan: Cepat dilatih, efisien dalam penggunaan memori, dan seringkali memberikan kinerja yang sangat baik, terutama pada dataset besar.
 
-- Kekurangan: Asumsi linearitas, kurang efektif untuk hubungan kompleks. [24]
+- Kekurangan: Bisa rentan terhadap overfitting pada dataset yang lebih kecil jika hyperparameter tidak diatur dengan hati-hati (terutama num_leaves).
 
 ### Proses Pelatihan dan Pemilihan Model Terbaik
 Semua model dilatih pada data latih. Optimasi hyperparameter dilakukan menggunakan RandomizedSearchCV dengan 3 folds untuk validasi silang, mencari 10 kandidat, dengan F1 Weighted sebagai metrik skor.
-
+![Image](https://github.com/user-attachments/assets/ff139013-0e49-421d-914a-13d42b901df7)
 ### Pemilihan Model Terbaik sebagai Solusi
-Berdasarkan skor F1 Weighted dari Cross-Validation dan laporan klasifikasi pada data uji setelah tuning, XGBoost dan LGBM menunjukkan kinerja yang sangat tinggi (F1-CV mendekati atau 1.0000). Logistic Regression juga menunjukkan kinerja yang sangat baik. Random Forest, meskipun baik, memiliki skor F1-CV sedikit lebih rendah (0.9814). Model dengan F1-Score (Macro) dan ROC-AUC tertinggi pada data uji akan menjadi pilihan utama. Mengingat skor sempurna atau mendekati sempurna pada beberapa model, perlu dipastikan tidak ada data leakage atau bahwa masalahnya memang sangat dapat dipisahkan oleh fitur yang ada.
+Berdasarkan skor F1 Weighted dari Cross-Validation dan laporan klasifikasi pada data uji setelah tuning, XGBoost, RandomForest dan LGBM menunjukkan kinerja yang sangat tinggi (F1-CV mendekati atau 1.0000). Logistic Regression juga menunjukkan kinerja yang sangat baik meskipun memiliki skor F1-CV sedikit lebih rendah (0.9991). Model dengan F1-Score (Macro) dan ROC-AUC tertinggi pada data uji akan menjadi pilihan utama. Mengingat skor sempurna atau mendekati sempurna pada beberapa model, perlu dipastikan tidak ada data leakage atau bahwa masalahnya memang sangat dapat dipisahkan oleh fitur yang ada.
 
 ## Evaluation
 Tahap evaluasi bertujuan untuk mengukur kinerja model-model yang telah dilatih pada data uji dan menginterpretasikan hasilnya.
@@ -491,12 +589,13 @@ $$\text{F1-Score} \;=\; 2 \times \frac{\text{Precision} \times \text{Recall}}{\t
 ### Hasil Evaluasi Model (Setelah Tuning)
 Berikut adalah hasil evaluasi kinerja model pada data uji  (369 sampel) setelah optimasi hyperparameter
 
-| Model               | Akurasi | Presisi (Macro) | Recall (Macro) | F1-Score (Macro) | ROC-AUC (OvR) |
-|---------------------|:-------:|:---------------:|:--------------:|:----------------:|:-------------:|
-| Logistic Regression |  1.00   |      1.00       |     1.00       |      1.00        |     1.00      |
-| Random Forest       |  0.96   |      0.98       |     0.87       |      0.91        |     1.00      |
-| XGBoost             |  1.00   |      1.00       |     1.00       |      1.00        |     1.00      |
-| LGBM                |  1.00   |      1.00       |     1.00       |      1.00        |     1.00      |
+| No. | Model               | Test Accuracy | Test F1 Weighted | Test F1 Macro | Test F1 Class 1 (Rating 4) | Test ROC AUC |
+|-----|---------------------|---------------|------------------|---------------|----------------------------|--------------|
+| 0   | LogisticRegression  | 1.0           | 1.0              | 1.0           | 1.0                        | 1.0          |
+| 1   | RandomForest        | 1.0           | 1.0              | 1.0           | 1.0                        | 1.0          |
+| 2   | XGBoost             | 1.0           | 1.0              | 1.0           | 1.0                        | 1.0          |
+| 3   | LGBM                | 1.0           | 1.0              | 1.0           | 1.0                        | 1.0          |
+
 
 ### Interpretasi Detail Laporan Klasifikasi (Setelah Tuning):
 
@@ -506,27 +605,26 @@ Mencapai skor sempurna (1.00) untuk presisi, recall, dan F1-score pada kedua kel
 
 - Random Forest:
 
-Akurasi keseluruhan 0.96. Untuk kelas 3 (mayoritas), presisi 0.95 dan recall 1.00 (F1-score 0.98), yang berarti semua sampel kelas 3 berhasil diidentifikasi, meskipun ada sedikit prediksi positif yang salah. Untuk kelas 4 (minoritas), presisi 1.00 (semua yang diprediksi kelas 4 memang benar kelas 4), tetapi recall 0.74 (F1-score 0.85). Ini berarti model hanya berhasil mengidentifikasi 74% dari total sampel kelas 4 yang sebenarnya. Skor F1-macro adalah 0.91.
+Akurasi keseluruhan 1.0. Untuk kelas 3 , presisi 1.00 dan recall 1.00 (F1-score 1.0), yang berarti semua sampel kelas 3 berhasil diidentifikasi, . Untuk kelas 4 (minoritas), presisi 1.00 (semua yang diprediksi kelas 4 memang benar kelas 4), recall 1.0 (F1-score 1.0). Ini berarti model hanya berhasil mengidentifikasi semua total sampel kelas 4 yang sebenarnya. Skor F1-macro adalah 1.0.
 
 - XGBoost:
 
-Mirip dengan Logistic Regression, XGBoost mencapai skor sempurna (1.00) untuk presisi, recall, dan F1-score pada kedua kelas, dengan akurasi keseluruhan 1.00. Model ini juga mengklasifikasikan semua sampel pada data uji dengan sempurna.
+Mirip dengan Logistic Regression dan RandomForest, XGBoost mencapai skor sempurna (1.00) untuk presisi, recall, dan F1-score pada kedua kelas, dengan akurasi keseluruhan 1.00. Model ini juga mengklasifikasikan semua sampel pada data uji dengan sempurna.
 
 - LGBM:
 
-Sama seperti XGBoost dan Logistic Regression, LGBM juga mencapai skor sempurna (1.00) untuk presisi, recall, dan F1-score pada kedua kelas, dengan akurasi keseluruhan 1.00, menunjukkan klasifikasi yang sempurna pada data uji.
+Sama seperti model lainnya, LGBM juga mencapai skor sempurna (1.00) untuk presisi, recall, dan F1-score pada kedua kelas, dengan akurasi keseluruhan 1.00, menunjukkan klasifikasi yang sempurna pada data uji.
 
-Model XGBoost dan LGBM (serta Logistic Regression) menunjukkan kinerja yang sempurna atau mendekati sempurna pada data uji berdasarkan metrik yang dilaporkan. Random Forest juga menunjukkan kinerja yang sangat baik, meskipun sedikit di bawah yang lain dalam hal recall untuk kelas 4 (karyawan dengan PerformanceRating = 4). Kinerja sempurna atau mendekati sempurna pada beberapa model (Logistic Regression, XGBoost, LGBM) pada data uji sangat menggembirakan, namun juga memerlukan investigasi lebih lanjut. Hal ini bisa jadi mengindikasikan bahwa dataset memiliki pemisahan kelas yang sangat jelas dengan fitur-fitur yang ada, atau, pada skenario yang kurang ideal, bisa jadi ada bentuk data leakage yang tidak terdeteksi dalam pipeline pra-pemrosesan, atau dataset uji mungkin tidak cukup beragam/besar untuk menguji generalisasi model sepenuhnya. Validasi dengan set data yang benar-benar baru dan independen sangat direkomendasikan.
-
+Semua Model menunjukkan kinerja yang sempurna atau mendekati sempurna pada data uji berdasarkan metrik yang dilaporkan.. Kinerja sempurna atau mendekati sempurna pada model yang dipilih pada data uji sangat menggembirakan saya, namun juga memerlukan investigasi lebih lanjut. Hal ini bisa jadi mengindikasikan bahwa dataset memiliki pemisahan kelas yang sangat jelas dengan fitur-fitur yang ada, atau, pada skenario yang kurang ideal, bisa jadi ada bentuk data leakage yang tidak terdeteksi dalam pipeline pra-pemrosesan, atau dataset uji mungkin tidak cukup beragam/besar untuk menguji generalisasi model sepenuhnya. 
 ![image](https://github.com/user-attachments/assets/729cd60b-c038-4049-b913-f4b1c0520429)
-![image](https://github.com/user-attachments/assets/c1dc384a-16f5-4a12-bb56-5542d838c922)
+![Image](https://github.com/user-attachments/assets/d3564395-b7d2-4161-b303-fed52611bd01)
 ![image](https://github.com/user-attachments/assets/0fbf816f-9822-4eba-9964-172b1bdc672e)
 ![image](https://github.com/user-attachments/assets/e4f5355c-dba4-4c52-83f7-076783f1b511)
 
 
 
 ### Analisis Faktor Penting (Feature Importance)
-Analisis kepentingan fitur dilakukan untuk memahami kontribusi masing-masing fitur terhadap prediksi model. Output menunjukkan skor kepentingan fitur untuk model Logistic Regression, Random Forest, XGBoost, dan LGBM. Perlu dicatat bahwa setelah pra-pemrosesan (terutama one-hot encoding), jumlah fitur meningkat menjadi 1153. Banyak di antaranya adalah fitur turunan dari EmpID yang kemungkinan besar tidak memberikan kontribusi prediktif dan memiliki skor kepentingan nol, yang sesuai dengan ekspektasi jika EmpID adalah pengidentifikasi unik.
+Analisis kepentingan fitur dilakukan untuk memahami kontribusi masing-masing fitur terhadap prediksi model. Output menunjukkan skor kepentingan fitur untuk model Logistic Regression, Random Forest, XGBoost, dan LGBM. Perlu dicatat bahwa setelah pra-pemrosesan (terutama one-hot encoding), jumlah fitur meningkat menjadi 52.
 
 - Logistic Regression (Tuned):
 ![image](https://github.com/user-attachments/assets/5f08ba33-4841-45fc-843a-15e902c6c4dd)
@@ -535,7 +633,7 @@ Analisis kepentingan fitur dilakukan untuk memahami kontribusi masing-masing fit
 
 2. Fitur lain yang muncul dengan skor lebih rendah termasuk BusinessTravel_Travel_Rarely (~0.84), JobInvolvement (~0.37), JobRole_Sales Representative (~0.27), dan Gender_Male (~0.25).
 
-3. Banyak fitur turunan dari EmpID memiliki skor 0.0, yang mengindikasikan tidak adanya kontribusi.
+
 
 Untuk Regresi Logistik, PercentSalaryHike mendominasi sebagai faktor penentu. Fitur-fitur kategorikal yang telah di-encode (seperti aspek perjalanan bisnis, peran pekerjaan, dan jenis kelamin) juga memberikan kontribusi, meskipun jauh lebih kecil.
 
@@ -546,7 +644,7 @@ Untuk Regresi Logistik, PercentSalaryHike mendominasi sebagai faktor penentu. Fi
 
 2. Diikuti oleh MonthlyRate (~0.049), TotalWorkingYears (~0.044), YearsInCurrentRole (~0.044), dan DistanceFromHome (~0.041).
 
-3. Sama seperti Logistic Regression, banyak fitur turunan EmpID memiliki skor kepentingan 0.0.
+
 
 Random Forest juga menyoroti PercentSalaryHike sebagai fitur paling signifikan. Namun, model ini juga memberikan bobot yang cukup pada fitur-fitur terkait kompensasi lain (MonthlyRate), pengalaman (TotalWorkingYears), dan stabilitas peran (YearsInCurrentRole), serta faktor demografis (DistanceFromHome).
 
@@ -557,7 +655,7 @@ Random Forest juga menyoroti PercentSalaryHike sebagai fitur paling signifikan. 
 
 2. Fitur-fitur berikutnya dengan skor yang jauh lebih kecil adalah YearsSinceLastPromotion (~0.025), OverTime_Yes (~0.023), DistanceFromHome (~0.022), dan TrainingTimesLastYear (~0.019).
 
-3. Fitur turunan EmpID juga menunjukkan skor 0.0.
+
 
 XGBoost sangat menekankan pentingnya PercentSalaryHike. Faktor-faktor lain seperti waktu sejak promosi terakhir, status kerja lembur, jarak dari rumah, dan jumlah pelatihan tahun lalu juga dipertimbangkan, meskipun dengan bobot yang jauh lebih rendah.
 
@@ -576,16 +674,15 @@ Secara keseluruhan, PercentSalaryHike secara konsisten muncul sebagai fitur yang
 ### Kesimpulan Evaluation
 Proyek ini bertujuan untuk mengembangkan model machine learning yang mampu memprediksi peringkat kinerja (PerformanceRating) karyawan menggunakan dataset "HR Analytics Dataset" dari Kaggle. Berdasarkan analisis dan pemodelan yang dilakukan:
 
-- Model seperti XGBoost, LGBM, dan Logistic Regression menunjukkan kinerja yang sangat tinggi setelah optimasi hyperparameter, dengan F1-Score (Macro) dan Akurasi mencapai 1.00 pada data uji. Hasil ini mengindikasikan kemampuan klasifikasi yang sempurna pada set data uji yang digunakan.
+- Semua model X menunjukkan kinerja yang sangat tinggi setelah optimasi hyperparameter, dengan F1-Score (Macro) dan Akurasi mencapai 1.00 pada data uji. Hasil ini mengindikasikan kemampuan klasifikasi yang sempurna pada set data uji yang digunakan.
 
-- Model Random Forest juga menunjukkan kinerja yang kuat dengan F1-Score (Macro) 0.91 dan Akurasi 0.96, meskipun sedikit di bawah tiga model lainnya, terutama dalam hal recall untuk kelas minoritas (PerformanceRating = 4).
 
 
 1. Menjawab Problem Statements:
 
-- Efektivitas Model: Proyek ini berhasil membangun beberapa model machine learning (Logistic Regression, XGBoost, LGBM) yang menunjukkan efektivitas sangat tinggi (akurasi dan F1-score 1.00 pada data uji) dalam mengklasifikasikan PerformanceRating. Model Random Forest juga menunjukkan kinerja yang kuat (F1-macro 0.91). Ini menjawab pertanyaan pertama mengenai kemampuan membangun model yang efektif.
+- Efektivitas Model: Proyek ini berhasil membangun beberapa model machine learning (Logistic Regression, RandomForest, XGBoost, LGBM) yang menunjukkan efektivitas sangat tinggi (akurasi dan F1-score 1.00 pada data uji) dalam mengklasifikasikan PerformanceRating. Ini menjawab pertanyaan pertama mengenai kemampuan membangun model yang efektif.
 
-- Algoritma Terbaik: Berdasarkan metrik evaluasi pada data uji, XGBoost, LGBM, dan Logistic Regression memberikan kinerja prediksi terbaik yang hampir identik dan sempurna. Pemilihan satu model "terbaik" dari ketiganya bisa mempertimbangkan faktor lain seperti kompleksitas atau waktu inferensi jika ada perbedaan signifikan.
+- Algoritma Terbaik: Berdasarkan metrik evaluasi pada data uji, XGBoost, Randomforest, LGBM, dan Logistic Regression memberikan kinerja prediksi terbaik yang hampir identik dan sempurna. Pemilihan satu model "terbaik" dari keempatnya bisa mempertimbangkan faktor lain seperti kompleksitas atau waktu inferensi jika ada perbedaan signifikan.
 
 - Fitur Signifikan: Analisis feature importance mengungkapkan bahwa PercentSalaryHike secara konsisten menjadi faktor paling signifikan di hampir semua model. Fitur lain seperti Age (khususnya untuk LGBM), YearsSinceLastPromotion, OverTime_Yes, dan beberapa aspek kompensasi serta pengalaman kerja juga menunjukkan kontribusi. Ini menjawab pertanyaan mengenai fitur-fitur kunci yang memengaruhi kinerja.
 
@@ -601,7 +698,7 @@ Proyek ini bertujuan untuk mengembangkan model machine learning yang mampu mempr
 
 - Optimasi hyperparameter telah dilakukan pada model-model utama.
 
-- Model dengan kinerja terbaik (XGBoost, LGBM, Logistic Regression) telah diidentifikasi berdasarkan metrik yang relevan.
+- Model dengan kinerja terbaik (model yang dipilih) telah diidentifikasi berdasarkan metrik yang relevan.
 
 - Analisis fitur paling berpengaruh telah dilakukan.
 
@@ -609,7 +706,7 @@ Proyek ini bertujuan untuk mengembangkan model machine learning yang mampu mempr
 
 - Analisis Data dan Pra-pemrosesan Komprehensif: Solusi ini berdampak signifikan pada kualitas data yang digunakan untuk melatih model. Langkah-langkah seperti penghapusan duplikat, imputasi nilai hilang pada YearsWithCurrManager, dan encoding yang tepat memastikan model belajar dari data yang bersih dan relevan. Kualitas data ini terukur dari tidak adanya error saat pemodelan dan kemampuan model untuk mencapai kinerja tinggi.
 
-- Pengembangan dan Optimasi Model Klasifikasi Komparatif: Solusi untuk mengembangkan dan mengoptimasi beberapa model memungkinkan identifikasi algoritma yang paling sesuai untuk dataset ini. RandomizedSearchCV membantu menemukan parameter optimal yang menghasilkan peningkatan kinerja signifikan (sebagaimana terlihat dari skor F1-CV yang tinggi untuk XGBoost, LGBM, dan Logistic Regression). Perbandingan metrik evaluasi antar model memberikan dasar yang kuat untuk memilih solusi prediktif terbaik. Skor F1-Score (Macro) dan Akurasi yang mencapai 1.00 pada beberapa model setelah optimasi menunjukkan dampak besar dari pendekatan ini.
+- Pengembangan dan Optimasi Model Klasifikasi Komparatif: Solusi untuk mengembangkan dan mengoptimasi beberapa model memungkinkan identifikasi algoritma yang paling sesuai untuk dataset ini. RandomizedSearchCV membantu menemukan parameter optimal yang menghasilkan peningkatan kinerja signifikan (sebagaimana terlihat dari skor F1-CV yang tinggi untuk semua model). Perbandingan metrik evaluasi antar model memberikan dasar yang kuat untuk memilih solusi prediktif terbaik. Skor F1-Score (Macro) dan Akurasi yang mencapai 1.00 pada beberapa model setelah optimasi menunjukkan dampak besar dari pendekatan ini.
 
 ## Referensi
 Referensi
