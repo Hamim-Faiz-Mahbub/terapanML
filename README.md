@@ -494,7 +494,7 @@ Pada tahap ini, akan dilakukan pengembangan beberapa model machine learning untu
 
 - Cara Kerja: Random Forest adalah metode ensemble learning yang bekerja dengan membangun sejumlah besar pohon keputusan (decision trees) secara independen pada berbagai sub-sampel data latih (teknik bagging atau bootstrap aggregating). Untuk setiap split pada pohon, hanya subset acak dari fitur yang dipertimbangkan (random feature selection). Hal ini bertujuan untuk mengurangi varians dan korelasi antar pohon, sehingga meningkatkan robustisitas dan akurasi model. Untuk prediksi klasifikasi, setiap pohon memberikan "suara" untuk kelas tertentu, dan kelas dengan suara mayoritas menjadi prediksi akhir dari forest. [26, 27]
 
-- Parameter Default & Optimasi: Parameter terbaik yang ditemukan setelah tuning menggunakan RandomizedSearchCV adalah: {'classifier__n_estimators': 150, 'classifier__min_samples_split': 5, 'classifier__min_samples_leaf': 5, 'classifier__max_depth': None}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000 
+- Parameter Default & Optimasi: Parameter terbaik yang ditemukan setelah tuning menggunakan RandomizedSearchCV adalah: {'classifier__n_estimators': 100, 'classifier__min_samples_split': 2, 'classifier__min_samples_leaf': 1, 'classifier__max_depth': None}. Skor F1 Weighted terbaik dari Cross-Validation (CV) adalah 1.0000 
 
 - Kelebihan: Umumnya memiliki akurasi prediksi yang tinggi, robust terhadap overfitting dibandingkan satu decision tree, dapat menangani data dengan banyak fitur, dan menyediakan ukuran kepentingan fitur. [26, 27]
 
